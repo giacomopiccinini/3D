@@ -43,5 +43,10 @@ def downsample_point_cloud(point_cloud, ratio):
     # Extract the sample points
     sample_points = points[sample_positions]
 
-    # Return PolyData object
-    return pv.PolyData(sample_points)
+    # Create downsampled PointCloud
+    downsampled = pv.PolyData(sample_points)
+
+    # Assign scalar value named "Height" at the third column (greyscale)
+    downsampled['Height'] = downsampled.points[:, 2]
+
+    return downsampled
