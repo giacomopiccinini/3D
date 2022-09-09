@@ -9,7 +9,7 @@ def create_point_cloud(image):
     coordinates = np.argwhere(image)
 
     # Retrieve depths (greyscale values)
-    depths = image.flatten()
+    depths = image.flatten().astype("float32")
 
     # Construct points
     points = np.column_stack((coordinates, depths))
