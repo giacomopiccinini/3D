@@ -6,7 +6,7 @@ def create_point_cloud(image):
     """ Create point cloud from depth image"""
 
     # Retrieve coordinates from image (i.e. y, x)
-    coordinates = np.argwhere(image)
+    coordinates = np.argwhere(image != np.NaN)
 
     # Retrieve depths (greyscale values)
     depths = image.flatten().astype("float32")
@@ -50,3 +50,13 @@ def downsample_point_cloud(point_cloud, ratio):
     downsampled['Height'] = downsampled.points[:, 2]
 
     return downsampled
+
+
+def threshold_point_cloud(point_cloud, minimum, maximum):
+
+    """ Consider only points whose height is in a given range [minimum, maximum]"""
+
+    # Apply threshold to input point cloud
+    point_cloud_threshold = point_cloud.threshold([minimum, maximum])
+
+    return point_cloud_threshold
