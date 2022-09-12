@@ -20,7 +20,7 @@ def create_smooth_surface(image, n_iter = 1000):
     z = image[y, x]
 
     # Construct grid in pyVista (necessary for surface creation)
-    grid = pv.StructuredGrid(y, x, z)
+    grid = pv.StructuredGrid(y.astype('float32'), x.astype('float32'), z)
 
     # Create surface 
     surface = grid.extract_surface()
